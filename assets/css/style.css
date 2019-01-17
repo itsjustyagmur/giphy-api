@@ -1,0 +1,16 @@
+
+body {
+	font-family: 'Noto Sans', sans-serif;
+	background: powderblue;
+	color: #fff;
+}
+
+#addShow {color: white;
+    background: palevioletred;
+
+}
+
+#show {
+    background: palevioletred;
+    color: white;
+}
