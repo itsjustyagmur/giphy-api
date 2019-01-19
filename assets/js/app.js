@@ -1,75 +1,55 @@
 var topics= ["Rick and Morty","Futurama","Simpsons","Family Guy", "South Park", "F is for Family"];
-function createButtons() {
-    $("#buttons").empty();
 
+$(document).ready(function() {
     for (var i = 0; i < topics.length; i++) {
-
-        var btn = $("<button>");
-
-        btn.addClass("topicBtn");
-
-        btn.attr("data-name", topics[i]);
-
-        btn.text(topics[i]);
-
-        $("#buttons").append(btn);
-    };
-
-};
-$("#newInput").on("click", function (event) {
-    event.preventDefault();
-
-    var newCartoon = $("#userInput").val().trim();
-
-    topics.push(newCartoon);
-
-    $("#userInput").val("");
-
-    createButtons();
-
+        $("buttons").append("<button type='button' onclick='searchGif(\"" + topics[i] + "\")' class='btn btn-primary' value=' " + topics[i] + "'> " + topics[i] + " </button>");
+    }
 });
 
-createButtons();
+function cartoonButtonClicked() {
+    var userInput = $('#input').val();
+    searchGif(userInput);
+}
 
-function fetchData() {
+function submitButtonClicked() {
+    var userInput = $('#input').val();
 
-    var cartoon2 = $(this).attr("data-name");
+    if (userInput) {
+        $('#buttons').append("<button type='button' onclick='searchGif(\"" + userInput + "\")' class='btn btn-primary' value=' " + userInput + "'> " + userInput + " </button>");
+    }
+}
 
-    var Cartoon = cartoon2.split(" ").join("+");
+function searchGif(gifName) {
+    $.ajax({
+            url: 'https://api.giphy.com/v1/gifs/search?q= ' + gifName + ' &api_key=dc6zaTOxFJmzC',
+            type: 'GET',
+        })
+        .done(function(response) {
+            displayGif(response);
+        })
+}
 
-    var queryURL = $.get("https://api.giphy.com/v1/gifs/search?q=" +
-        Cartoon + "&api_key=mdAbEQ35ChJpM86J7JnCecluwdSqgTbn&limit=10");
+function displayGif(response) {
+    $('#cartoons').empty();
+    for (var i = 0; i < response.data.length; i++) {
+        var rating = "<div class='ratings'> Rating:  " + (response.data[i].rating) + " </div>";
+        var image = rating + '<img src= " ' + response.data[i].images.fixed_height_still.url +
+            '" data-still=" ' + response.data[i].images.fixed_height_still.url +
+            ' " data-animate=" ' + response.data[i].images.fixed_height.url + '" data-state="still" class="movImage" style= "width:250px; height:250px">';
 
-        queryURL.done(function (response) {
-            var results = response.data;
-    
-            $("#giphyFeed").empty();
-    
-            for (var i = 0; i < results.length; i++) {
-    
-                var gifDiv = $("#giphyFeed");
-    
-                var rating = results[i].rating;
-    
-                var p = $("<p>").text("Rating: " + rating);
-                var cGif = $("<img>");
+        image = '<div class="col-md-4">' + image + "</div>";
+        $('#cartoons').append(image);
+    }
 
-                cGif.attr("src", results[i].images.fixed_height.url);
-                cGif.attr("data-state", "still");
-                cGif.attr("data-positon", i);
-    
-                gifDiv.prepend(p);
-                gifDiv.prepend(cGif)
-    
-            };
-        })};
-            function pausePlayGifs() {
-                var state = $(this).attr("data-state");
-               if (state === "still") {
-                 $(this).attr("src", $(this).attr("data-animate"));
-                 $(this).attr("data-state", "animate");
-               } else {
-                 $(this).attr("src", $(this).attr("data-still"));
-                 $(this).attr("data-state", "still");
-           }
-         }
+    $('.movImage').on('click', function() {
+        var state = $(this).attr('data-state');
+        if (state == 'still') {
+            $(this).attr('src', $(this).attr("data-animate"));
+            $(this).attr('data-state', 'animate');
+        } else {
+            $(this).attr('src', $(this).attr("data-still"));
+            $(this).attr('data-state', 'still');
+        }
+
+    });
+}
