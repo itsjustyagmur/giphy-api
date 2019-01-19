@@ -1,41 +1,52 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<head>
-  <link rel="icon" type="gif" href="assets/images/giphy.gif">
-	<meta charset="utf-8">
-  <title>D'OH</title>
-  
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/js/app.js"></script>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gif Tastic Cartoonss</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
-		<div id="buttons-view"></div><br>
-
-        <input type="text" placeholder="Add More Cartoons" name="search">
-        <button id="addShow" value="submit" type="submit">Search</button>
-      <div class="row">
-          <div class="container">
-              <div class="btn-group inline pull-left">
-                <button  id="show" data-search="Simpsons">Simpsons</button>
-                <button  id="show" data-search="Rick and Morty">Rick and Morty</button>
-                <button  id="show" data-search="Futurama">Futurama</button>
-                <button  id="show" data-search="Family Guy">Family Guy</button>
-                <button  id="show" data-search="South Park">South Park</button>
-                <button  id="show" data-search="F is for Family">F is for Family</button>
-                <div id="myButtons"></div>
-              </div>
-              </div>
+<body>
+    <div class="container" style="background: transparent;">
+        <br>
+        <br>
+        <div id="buttons"> 
+        <div class="row">
+            <div class="container">
+                <div class="btn-group inline pull-left">
+                  <button id="show" data-search="Simpsons">Simpsons</button>
+                  <button  id="show" data-search="Rick and Morty">Rick and Morty</button>
+                  <button  id="show" data-search="Futurama">Futurama</button>
+                  <button  id="show" data-search="Family Guy">Family Guy</button>
+                  <button  id="show" data-search="South Park">South Park</button>
+                  <button  id="show" data-search="F is for Family">F is for Family</button>
+                </div>
+        <br>
+        <br>
+        <div class="container" id="btn" style="background: transparent;">
+            <form id="form">
+                <label id="add" for="input">Please enter your favortie Cartoons</label>
+                <input type="text" class="form-control" id="input">
+                <br>
+                <br>
+            </form>
+            <button onclick="submitButtonClicked()" type="button" id="add" class="btn btn-success">Submit</button>
+            <br>
+            <br>
+            <div id="cartoonss"> </div>
         </div>
-              <div class="row">
-                  <div class="container">
-                      <span><div id="gifArea"></div></span>
-                  </div> 
-               </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="assets/js/app.js"></script>
+</body>
 
-
+</html>
 
 </body>
 </html>
